@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+</head>
+
+<body>
+    {% if user %}
+    <ul>
+        
+        <li><h5>{{user.id}}</h5></li>
+        <li><h5>{{user.username}}</h5></li>
+
+    </ul>
+    {% else %}
+    <p>No users are available.</p>
+    {% endif %}
+</body>
+
+</html>
