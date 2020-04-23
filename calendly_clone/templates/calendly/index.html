@@ -10,9 +10,13 @@
     {% if user %}
     <ul>
         
-        <li><h5>{{user.id}}</h5></li>
-        <li><h5>{{user.username}}</h5></li>
-
+        <li>User id = {{user.id}}</li>
+        <li>Username = {{user.username}}</li>
+        <li>Current calories = {{user.curr_calories}}</li>
+        <li>Total calories = {{user.total_calories}}</li>
+        <li>In limit = {{user.calories_exceeded}}</li>
+        
+        <li><a href="{% url 'edit_user' user.id %}">Edit user data</a></li>
     </ul>
     {% else %}
     <p>No users are available.</p>

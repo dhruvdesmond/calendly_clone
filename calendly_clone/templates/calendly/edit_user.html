@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+</head>
+
+<body>
+    {% if user %}
+    <form action="{% url 'edit_user' user.id %}" method="post">
+        {% csrf_token %}
+        <input type="text" name="password" placeholder="{{user.password}}">
+        <input type="number" name="curr_calories" placeholder="{{user.curr_calories}}">
+        <input type="number" name="total_calories" placeholder="{{user.total_calories}}">
+
+        <input type="submit" value="Vote">
+    </form>
+    {% else %}
+    <p>No users are available.</p>
+    {% endif %}
+</body>
+
+</html>

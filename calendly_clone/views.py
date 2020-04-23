@@ -12,12 +12,36 @@ def index(request):
 
 def get_user(request,user_id):
     try:
+        print(user_id)
         name = User.objects.get(pk=user_id)
+        print(name.username)
     except User.DoesNotExist:
         raise Http404("User does not exit")
-    template = loader.get_template('calendly/index.html')
+    template = loader.get_template('calendly/index.html') 
 
-    return HttpResponse(template.render({'name': name}, request))
+    return HttpResponse(template.render({'user': name}, request))
+
+def edit_user(request,user_id):
+    if request.method == "POST":
+        data = request.POST
+
+        password = data["password"]
+        curr_calories = data["curr_calories"]
+        totalCalories = data["total_calories"]
+        User.objects.filter(pk=user_id).update(password=password,curr_calories=curr_calories,total_calories=totalCalories)
+        User().save()
+        return redirect("get_user",user_id)
+    else:
+        try:
+            print(user_id)
+            name = User.objects.get(pk=user_id)
+            print(name.username)
+        except User.DoesNotExist:
+            raise Http404("User does not exit")
+        template = loader.get_template('calendly/edit_user.html')
+        return HttpResponse(template.render({'user': name}, request))
+
+
 
 
 def get_all_users(request):
@@ -36,7 +60,7 @@ def add_user(request):
         userName = data["user_name"]
         passWord = data["password"]
         totalCalories = data["total_calories"]
-        User.objects.create(username=userName,password=passWord,curr_calories=0,total_calories=totalCalories,calories_exceeded=True)
+        User.objects.create(username=userName,password=passWord,curr_calories=0,total_calories=totalCalories,calories_exceeded=False)
         User().save()
         return redirect('/users/')
     else:
