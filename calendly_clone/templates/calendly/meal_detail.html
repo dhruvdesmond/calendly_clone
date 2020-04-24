@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+</head>
+
+<body>
+    {% if meal %}
+    <ul>
+        
+        <li>Food = {{meal.meal_name}}</li>
+        <li>Food calories = {{meal.calories}}</li>
+        <li>Eaten by = {{meal.username.username}}</li>
+       
+        
+    </ul>
+    {% else %}
+    <p>No meals are available.</p>
+    {% endif %}
+</body>
+
+</html>
